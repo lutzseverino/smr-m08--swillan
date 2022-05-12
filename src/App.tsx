@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Home from './home';
+import Home from './pages/home';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Router>
         <Routes> { /* The Switch decides which component to show based on the current URL.*/ }
           <Route path='/' element={<Home />}></Route>

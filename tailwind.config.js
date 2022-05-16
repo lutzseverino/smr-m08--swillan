@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         gravitas: '"Gravitas\\ One", sans-serif',
+        roboto: '"Roboto", sans-serif',
       },
       colors: {
         cadet: "#546A76",

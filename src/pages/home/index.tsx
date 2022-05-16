@@ -1,13 +1,14 @@
 import React from "react";
-import Section from "../../components/section";
 
 export default class Home extends React.Component {
-  render() {
+  render(): React.ReactNode {
     return (
-      <div>
-        <h1 className="font-gravitas text-3xl">
-          Learn without even logging in
+      <div className="p-8">
+        <h1>
+          Learn, <br />
+          without gates
         </h1>
+        <h4>Find begginer courses to jump start your programming journey</h4>
       </div>
     );
   }

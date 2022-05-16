@@ -5,30 +5,25 @@
 import React from "react";
 
 interface requiredProps {
-    children: React.ReactNode;
-};
+  children: React.ReactNode;
+}
 
 interface optionalProps {
-    min: string;
-};
+  min: string;
+}
 
-interface Props extends requiredProps, optionalProps {};
+interface Props extends requiredProps, optionalProps {}
 
 const defaultProps: optionalProps = {
-    min: "m-0",
+  min: "m-0",
 };
 
 export default class Section extends React.Component<Props> {
-    static defaultProps: optionalProps;
+  static defaultProps: optionalProps;
 
-    render() {
-
-        return (
-            <div className={this.props.min}>
-                {this.props.children}
-            </div>
-        );
-    }
+  render(): React.ReactNode {
+    return <div className={this.props.min}>{this.props.children}</div>;
+  }
 }
 
 Section.defaultProps = defaultProps;

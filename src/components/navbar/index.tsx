@@ -10,8 +10,8 @@ export default class Navbar extends React.Component {
           </a>
         </div>
         <div className="flex-rows flex gap-8 ">
-          <a href="#">Courses</a>
-          <a href="#">How does this work?</a>
+          <a href="/#">Courses</a>
+          <a href="/#">How does this work?</a>
         </div>
       </nav>
     );

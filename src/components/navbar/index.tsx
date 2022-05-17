@@ -3,7 +3,7 @@ import React from "react";
 export default class Navbar extends React.Component {
   render(): React.ReactNode {
     return (
-      <nav className="flex-rows m-8 flex items-center justify-between gap-8 rounded-2xl border-black bg-cambridge-blue p-4 shadow-xl ring-1 ring-black">
+      <nav className="flex-rows sticky top-8 m-8 flex items-center justify-between gap-8 rounded-2xl border-black bg-cambridge-blue p-4 shadow-xl ring-1 ring-black">
         <div>
           <a href="/">
             <img className="w-12" src="swillan logo.svg" alt="swillan logo" />

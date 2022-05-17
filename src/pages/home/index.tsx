@@ -8,7 +8,10 @@ export default class Home extends React.Component {
           Learn, <br />
           without gates
         </h1>
-        <h4>Find begginer courses to jump start your programming journey</h4>
+        <h4>
+          Find begginer courses to jump start your programming journey. Without
+          even logging in!
+        </h4>
       </div>
     );
   }

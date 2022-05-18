@@ -15,16 +15,76 @@ export default class Home extends React.Component<{}, State> {
     this.state = {
       availableCourses: [
         {
+          id: 0,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
           id: 1,
-          title: "Java begginer course",
-          description: "Learn the basics of Java",
-          image: "java.png",
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
         },
         {
           id: 2,
-          title: "React begginer course",
-          description: "Learn the basics of React",
-          image: "react.png",
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 3,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 4,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 5,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 6,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 7,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 8,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 9,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 10,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
+        },
+        {
+          id: 11,
+          title: "Dummy course",
+          description: "This course doesn't exist, this is a dummy course",
+          image: "dummy.png",
         },
       ],
     };
@@ -34,7 +94,7 @@ export default class Home extends React.Component<{}, State> {
     console.table(this.state.availableCourses);
   }
 
-  // TODO: Use CSS Grid to display courses and finish styling
+  // TODO: Fix image scaling on screen devices.
   render(): React.ReactNode {
     return (
       <div className="px-8">
@@ -50,15 +110,23 @@ export default class Home extends React.Component<{}, State> {
         <div className="py-8">
           <h4>Available courses</h4>
 
-          <div className="flex flex-row justify-between">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {this.state.availableCourses.map((course) => (
               <div
                 key={course.id}
-                className="flex flex-col gap-8 rounded-2xl bg-cambridge-blue p-8 shadow-xl ring-1 ring-black"
+                className="flex flex-row overflow-hidden rounded-2xl bg-cambridge-blue shadow-xl ring-1 ring-black"
               >
-                <img src={course.image} alt={course.title + " image"} />
-                <div>{course.title}</div>
-                <div>{course.description}</div>
+                <div>
+                  <img
+                    className="h-full object-cover"
+                    src={course.image}
+                    alt={course.title + " image"}
+                  />
+                </div>
+                <div className="flex flex-col object-cover p-8">
+                  <h4>{course.title}</h4>
+                  <p>{course.description}</p>
+                </div>
               </div>
             ))}
           </div>

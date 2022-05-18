@@ -25,10 +25,22 @@ h1 {
   @apply pb-4 font-gravitas text-6xl;
 }
 
-h4 {
-  @apply pb-4 font-roboto text-xl font-bold;
+h2 {
+  @apply pb-4 font-gravitas text-3xl;
 }
 
-a {
-  @apply hover:underline;
+h3 {
+  @apply pb-4 font-roboto text-xl  font-bold;
+}
+
+h4 {
+  @apply pb-4 font-roboto text-lg font-bold;
+}
+
+h5 {
+  @apply pb-4 font-roboto text-lg;
+}
+
+h6 {
+  @apply pb-4 font-roboto text-sm font-bold;
 }

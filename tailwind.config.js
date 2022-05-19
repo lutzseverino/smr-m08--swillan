@@ -8,7 +8,7 @@ module.exports = {
       },
       colors: {
         cadet: "#546A76",
-        "pewter-blue": "#88AOA8",
+        "pewter-blue": "#88A0A8",
         "cambridge-blue": "#B4CEB3",
         timberwolf: "#DBD3C9",
         "pale-pink": "#FAD4D8",

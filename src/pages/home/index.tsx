@@ -17,7 +17,8 @@ export default class Home extends React.Component<{}, State> {
         {
           id: 0,
           title: "Dummy course",
-          description: "This course doesn't exist, this is a dummy course",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vulputate ex in tristique blandit. Quisque posuere suscipit mi at pharetra. Duis pharetra ultrices odio in fermentum. Fusce eleifend condimentum enim, rhoncus tincidunt orci posuere sed. Cras ac congue nunc. Nam sed laoreet magna, a feugiat leo. Morbi egestas ultricies est, non imperdiet eros luctus in. Etiam scelerisque ullamcorper fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin lobortis id odio ut posuere.",
           image: "dummy.png",
         },
         {
@@ -94,7 +95,7 @@ export default class Home extends React.Component<{}, State> {
     console.table(this.state.availableCourses);
   }
 
-  // TODO: Fix image scaling on screen devices.
+  // TODO: Export button to external component
   render(): React.ReactNode {
     return (
       <div className="px-8">
@@ -108,24 +109,31 @@ export default class Home extends React.Component<{}, State> {
         </h3>
 
         <div className="py-8">
-          <h4>Available courses</h4>
+          <h4>Recommended courses</h4>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 2xl:grid-cols-3">
             {this.state.availableCourses.map((course) => (
               <div
                 key={course.id}
-                className="flex flex-row overflow-hidden rounded-2xl bg-cambridge-blue shadow-xl ring-1 ring-black"
+                className={
+                  "flex flex-col overflow-hidden rounded-2xl border-[1px] border-black bg-pale-pink transition-all md:h-48 md:flex-row"
+                }
               >
-                <div>
+                <div className="w-full">
                   <img
-                    className="h-full object-cover"
+                    className="h-52 w-full object-cover "
                     src={course.image}
                     alt={course.title + " image"}
                   />
                 </div>
-                <div className="flex flex-col object-cover p-8">
-                  <h4>{course.title}</h4>
-                  <p>{course.description}</p>
+                <div className="flex flex-col md:min-w-[60%] md:max-w-[60%]">
+                  <h4 className="px-8 pt-8">{course.title}</h4>
+                  <div className="h-full overflow-hidden from-black via-black bg-clip-text px-8 pb-8 md:bg-gradient-to-b md:pb-0 md:text-transparent">
+                    <p className="">{course.description}</p>
+                  </div>
+                  <button className="relative bottom-4 ml-auto mr-4 rounded-2xl bg-cadet px-4 py-2 text-white shadow-xl transition-colors hover:bg-pewter-blue">
+                    Learn more
+                  </button>
                 </div>
               </div>
             ))}

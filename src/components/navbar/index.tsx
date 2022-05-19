@@ -27,8 +27,9 @@ export default class Navbar extends React.Component<{}, { hide: Boolean }> {
     return (
       <nav
         className={
-          (this.state.hide ? "-top-full " : "top-8 ") +
-          "flex-rows sticky m-8 flex items-center justify-between gap-8 rounded-2xl border-black bg-cambridge-blue p-4 shadow-xl ring-1 ring-black transition-all duration-1000 ease-in-out"
+          (this.state.hide ? "-top-full " : "top-0 md:top-8 ") +
+          (window.scrollY > 0 ? " shadow-xl " : "") +
+          "flex-rows sticky mb-8 flex items-center justify-between gap-8 border-b-[1px] border-black bg-pale-pink p-4 transition-all duration-500 ease-in-out md:m-8 md:rounded-2xl md:border-[1px]"
         }
       >
         <div>

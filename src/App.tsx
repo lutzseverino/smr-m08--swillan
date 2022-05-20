@@ -11,7 +11,7 @@ function App() {
         <Routes>
           {" "}
           {/* The Switch decides which component to show based on the current URL.*/}
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </div>

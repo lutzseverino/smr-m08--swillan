@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../button";
 
 interface CourseBlockProps {
   id: number;
@@ -27,9 +28,7 @@ export default class CourseBlock extends React.Component<CourseBlockProps, {}> {
           <div className="h-full overflow-hidden from-black via-black bg-clip-text px-8 pb-8 md:bg-gradient-to-b md:pb-0 md:text-transparent">
             <p className="">{this.props.children}</p>
           </div>
-          <button className="relative bottom-4 ml-auto mr-4 rounded-2xl border-2 border-black bg-rhythm px-4 py-2 text-white transition-colors hover:bg-tropical-violet">
-            Learn more
-          </button>
+          <Button>Learn more</Button>
         </div>
       </div>
     );

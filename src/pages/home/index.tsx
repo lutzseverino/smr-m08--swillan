@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../../components/button";
 import CourseBlock, { CourseBlockSkeleton } from "../../components/courseblock";
 import { dummyCourses } from "../../data";
 
@@ -23,6 +24,8 @@ export default class Home extends React.Component<{}, HomeState> {
   }
 
   componentDidMount(): void {
+    document.title = "swillan - home";
+
     setTimeout(() => {
       this.setState({
         recommendedCourses: dummyCourses,
@@ -39,12 +42,12 @@ export default class Home extends React.Component<{}, HomeState> {
             <span className="underline">Learn</span>, without gates
           </h1>
           <h3>
-            Find begginer courses to jump start your programming journey.
-            Without even logging in!
+            Jump start your programming journey with swillan, a free online
+            course platform
           </h3>
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <h4>Recommended courses</h4>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 2xl:grid-cols-3">
@@ -66,6 +69,9 @@ export default class Home extends React.Component<{}, HomeState> {
                   {course.description}
                 </CourseBlock>
               ))}
+          </div>
+          <div className="mt-8 self-center">
+            <Button>Explore everything</Button>
           </div>
         </div>
       </div>

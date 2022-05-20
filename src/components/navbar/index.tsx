@@ -34,7 +34,7 @@ export default class Navbar extends React.Component<{}, { hide: Boolean }> {
       >
         <div>
           <a href="/">
-            <img className="w-12" src="swillan logo.svg" alt="swillan logo" />
+            <img className="w-12" src="/swillan logo.svg" alt="swillan logo" />
           </a>
         </div>
         <div className="flex-rows hidden gap-8 md:flex">

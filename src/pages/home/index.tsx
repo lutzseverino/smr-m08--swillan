@@ -17,14 +17,7 @@ export default class Home extends React.Component<{}, HomeState> {
     super(props);
 
     this.state = {
-      recommendedCourses: [
-        {
-          id: 0,
-          title: "loading",
-          description: "loading",
-          image: "dummy.png",
-        },
-      ],
+      recommendedCourses: [],
       loading: true,
     };
   }

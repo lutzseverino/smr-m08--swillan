@@ -1,7 +1,8 @@
 import React from "react";
-import Button from "../../components/button";
-import CourseBlock, { CourseBlockSkeleton } from "../../components/courseblock";
-import { dummyCourses } from "../../data";
+import Button from "components/button";
+import CourseBlock, { CourseBlockSkeleton } from "components/courseblock";
+
+import { dummyCourses } from "data";
 
 interface HomeState {
   recommendedCourses: {

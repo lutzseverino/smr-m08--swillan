@@ -31,7 +31,9 @@ export default class CourseBlock extends React.Component<CourseBlockProps, {}> {
           <div className="h-full overflow-hidden from-black via-black bg-clip-text px-8 pb-8 md:bg-gradient-to-b md:pb-0 md:text-transparent">
             <p className="">{this.props.children}</p>
           </div>
-          <Button>Learn more</Button>
+          <div className="relative bottom-4 ml-auto mr-4">
+            <Button>Learn more</Button>
+          </div>
         </div>
       </div>
     );

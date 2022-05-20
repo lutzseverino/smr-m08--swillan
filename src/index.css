@@ -44,3 +44,7 @@ h5 {
 h6 {
   @apply pb-4 font-roboto text-sm font-bold;
 }
+
+a {
+  @apply decoration-2 underline-offset-2 hover:underline;
+}

@@ -1,3 +1,4 @@
+import CourseSearch from "pages/coursesearch";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
@@ -10,8 +11,17 @@ function App() {
       <Navbar />
       <Router>
         <Routes>
-          {/* The Switch decides which component to show based on the current URL.*/}
           <Route path="/" element={<Home />} />
+          {/* /courses/ path with optional search and page */}
+          <Route path="/courses/" element={<CourseSearch />}>
+            <Route
+              path="search/:search/page/:page"
+              element={<CourseSearch />}
+            />
+            <Route path="search/:search" element={<CourseSearch />} />
+            <Route path="page/:page" element={<CourseSearch />} />
+            <Route path="" element={<CourseSearch />} />
+          </Route>
         </Routes>
       </Router>
       <Footer />

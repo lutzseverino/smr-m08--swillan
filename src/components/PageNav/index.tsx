@@ -18,13 +18,14 @@ export default class PageNav extends React.Component<PageNavProps> {
 
     return (
       <div className="flex flex-row items-center gap-4">
-        {this.props.current !== 1 && (
-          <>
-            <Button onClick={() => this.props.onClick(1)}>1</Button>
+        {RANGE.includes(1) ||
+          (this.props.current !== 1 && (
+            <>
+              <Button onClick={() => this.props.onClick(1)}>1</Button>
 
-            {MORE}
-          </>
-        )}
+              {MORE}
+            </>
+          ))}
 
         {RANGE.map((item, _index) => {
           return (

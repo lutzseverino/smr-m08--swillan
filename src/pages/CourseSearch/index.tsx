@@ -17,7 +17,6 @@ interface CourseSearchProps {
 }
 
 interface CourseSearchState {
-  foundCourses: CourseAd[];
   visibleCourses: CourseAd[];
 
   courseAmount: number;
@@ -38,7 +37,6 @@ class CourseSearch extends React.Component<
     super(props);
 
     this.state = {
-      foundCourses: [],
       visibleCourses: [],
 
       courseAmount: 0,
@@ -170,7 +168,6 @@ class CourseSearch extends React.Component<
       .getAdRangeBySearch(search, this.state.pageStartAt, this.state.pageEndAt)
       .then((response) => {
         this.setState({
-          foundCourses: response,
           visibleCourses: response,
 
           loading: false,

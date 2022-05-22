@@ -23,12 +23,7 @@ export default class Home extends React.Component<{}, HomeState> {
   componentDidMount() {
     document.title = "swillan - home";
 
-    this.state.courses.getAdRange(0, 6).then((response) => {
-      this.setState({
-        recommended: response,
-        loading: false,
-      });
-    });
+    this.load(6);
   }
 
   render(): React.ReactNode {
@@ -76,4 +71,13 @@ export default class Home extends React.Component<{}, HomeState> {
       </div>
     );
   }
+
+  private load = async (amount: number) => {
+    let courses = await this.state.courses.getAdRange(0, amount);
+
+    this.setState({
+      recommended: courses,
+      loading: false,
+    });
+  };
 }

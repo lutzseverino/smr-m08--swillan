@@ -32,6 +32,7 @@ class CourseSearch extends React.Component<
   CourseSearchState
 > {
   private courses = new CourseRepository();
+  private requests = new Array<Promise<CourseAd[]>>();
 
   constructor(props: any) {
     super(props);
@@ -122,6 +123,7 @@ class CourseSearch extends React.Component<
 
     this.setState(
       {
+        visibleCourses: [],
         loading: true,
       },
       () => {
@@ -158,28 +160,30 @@ class CourseSearch extends React.Component<
    *
    * @param search the search string
    */
-  private findCourses = (search: string = "") => {
-    this.setState({
-      visibleCourses: [],
-      loading: true,
-    });
+  private findCourses = async (search: string = "") => {
+    this.requests.unshift(
+      this.courses.getAdRangeBySearch(
+        search,
+        this.state.pageStartAt,
+        this.state.pageEndAt
+      )
+    );
 
-    this.courses
-      .getAdRangeBySearch(search, this.state.pageStartAt, this.state.pageEndAt)
-      .then((response) => {
-        this.setState({
-          visibleCourses: response,
+    let [courses, amount] = await Promise.all([
+      Promise.all(this.requests),
+      this.courses.getAdAmountBySearch(search),
+    ]);
 
-          loading: false,
-        });
-      });
-
-    this.courses.getAdAmountBySearch(search).then((response) => {
+    if (this.requests.length === 1) {
       this.setState({
-        courseAmount: response,
-        pageAmount: Math.ceil(response / 6),
+        visibleCourses: courses[0],
+        courseAmount: amount,
+        pageAmount: Math.ceil(amount / 6),
+        loading: false,
       });
-    });
+    }
+
+    this.requests.pop();
   };
 }
 

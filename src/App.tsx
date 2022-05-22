@@ -1,9 +1,9 @@
-import CourseSearch from "pages/coursesearch";
+import CourseSearch from "pages/CourseSearch";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Footer from "./components/footer";
-import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
-import Home from "./pages/home";
+import Home from "./pages/Home";
 
 function App() {
   return (

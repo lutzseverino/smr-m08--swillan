@@ -1,36 +1,27 @@
 import React from "react";
 
 export default class Navbar extends React.Component<{}, { hide: Boolean }> {
-  readonly scrollToHideAmount: number = 400;
+  private scrollToHideAmount: number = 400;
 
   constructor(props: any) {
     super(props);
-    this.state = { hide: Boolean(window.scrollY > this.scrollToHideAmount) };
+    this.state = { hide: window.scrollY > this.scrollToHideAmount };
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
 
-  componentWillUnmount(): void {
+  componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  readonly handleScroll = (event: Event): void => {
-    this.setState({ hide: window.scrollY > this.scrollToHideAmount });
-    console.debug(
-      "Scroll amount: " + window.scrollY + "\nHide navbar: " + this.state.hide
-    );
-  };
-
-  render(): React.ReactNode {
+  render() {
     return (
       <nav
-        className={
-          (this.state.hide ? "-top-full " : "top-0 md:top-8 ") +
-          (window.scrollY > 0 ? " shadow-xl " : "") +
-          "flex-rows sticky z-50 flex items-center justify-between gap-8 border-b-2 border-black bg-columbia-blue p-4 transition-all duration-500 ease-in-out md:m-8 md:rounded-2xl md:border-2"
-        }
+        className={`${this.state.hide ? "-top-full" : "top-0 md:top-8"} ${
+          window.scrollY > 0 ? " shadow-xl " : ""
+        } flex-rows sticky z-50 flex items-center justify-between gap-8 border-b-2 border-black bg-columbia-blue p-4 transition-all duration-500 ease-in-out md:m-8 md:rounded-2xl md:border-2`}
       >
         <div>
           <a href="/">
@@ -44,4 +35,8 @@ export default class Navbar extends React.Component<{}, { hide: Boolean }> {
       </nav>
     );
   }
+
+  private handleScroll = (event: Event) => {
+    this.setState({ hide: window.scrollY > this.scrollToHideAmount });
+  };
 }

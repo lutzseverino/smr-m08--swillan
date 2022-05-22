@@ -17,8 +17,6 @@ interface CourseSearchProps {
 }
 
 interface CourseSearchState {
-  courses: CourseRepository;
-
   foundCourses: CourseAd[];
   visibleCourses: CourseAd[];
 
@@ -34,11 +32,12 @@ class CourseSearch extends React.Component<
   CourseSearchProps,
   CourseSearchState
 > {
+  private courses = new CourseRepository();
+
   constructor(props: any) {
     super(props);
 
     this.state = {
-      courses: new CourseRepository(),
       foundCourses: [],
       visibleCourses: [],
 
@@ -171,7 +170,7 @@ class CourseSearch extends React.Component<
       loading: true,
     });
 
-    this.state.courses
+    this.courses
       .getAdRangeBySearch(search, this.state.pageStartAt, this.state.pageEndAt)
       .then((response) => {
         this.setState({
@@ -182,7 +181,7 @@ class CourseSearch extends React.Component<
         });
       });
 
-    this.state.courses.getAdAmountBySearch(search).then((response) => {
+    this.courses.getAdAmountBySearch(search).then((response) => {
       this.setState({
         courseAmount: response,
         pageAmount: Math.ceil(response / 6),

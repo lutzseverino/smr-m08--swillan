@@ -145,10 +145,6 @@ class CourseSearch extends React.Component<
     const STARTS = (page - 1) * 5;
     const ENDS = STARTS + 5;
 
-    console.debug(
-      "Current page starts at index: " + STARTS + "\nAnd ends at index: " + ENDS
-    );
-
     this.setState(
       {
         pageStartAt: STARTS,

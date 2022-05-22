@@ -1,16 +1,11 @@
 import React from "react";
-import Button from "components/button";
-import CourseBlock, { CourseBlockSkeleton } from "components/courseblock";
-
-import { dummyCourses } from "data";
+import Button from "components/Button";
+import CourseCard, { CourseCardSkeleton } from "components/CourseCard";
+import CourseRepository, { CourseAd } from "utils/CourseRepository";
 
 interface HomeState {
-  recommendedCourses: {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-  }[];
+  courses: CourseRepository;
+  recommended: CourseAd[];
   loading: boolean;
 }
 
@@ -19,26 +14,27 @@ export default class Home extends React.Component<{}, HomeState> {
     super(props);
 
     this.state = {
-      recommendedCourses: [],
+      courses: new CourseRepository(),
+      recommended: [],
       loading: true,
     };
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     document.title = "swillan - home";
 
-    setTimeout(() => {
+    this.state.courses.getAdRange(0, 6).then((response) => {
       this.setState({
-        recommendedCourses: dummyCourses,
+        recommended: response,
         loading: false,
-      }); //After 1 second, render courses
-    }, 2000);
+      });
+    });
   }
 
   render(): React.ReactNode {
     return (
-      <div className="px-8 md:px-16">
-        <div className="py-8 md:py-32">
+      <div className="m-8">
+        <div className="my-16 md:my-32">
           <h1>
             <span className="underline">Learn</span>, without gates
           </h1>
@@ -56,23 +52,25 @@ export default class Home extends React.Component<{}, HomeState> {
               Array(6)
                 .fill(undefined)
                 .map((_item, index) => {
-                  return <CourseBlockSkeleton key={index} />;
+                  return <CourseCardSkeleton key={index} />;
                 })}
 
             {!this.state.loading &&
-              this.state.recommendedCourses.map((course) => (
-                <CourseBlock
+              this.state.recommended.slice(0, 6).map((course) => (
+                <CourseCard
                   key={course.id}
                   id={course.id}
                   image={course.image}
                   title={course.title}
                 >
                   {course.description}
-                </CourseBlock>
+                </CourseCard>
               ))}
           </div>
           <div className="mt-8 self-center">
-            <Button>Explore everything</Button>
+            <Button onClick={() => (window.location.href = "courses/")}>
+              Explore everything
+            </Button>
           </div>
         </div>
       </div>

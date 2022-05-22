@@ -64,7 +64,7 @@ class CourseSearch extends React.Component<
             loading={this.state.loading}
             placeholder="Search courses"
             search={(search) => {
-              this.load(search, +this.props.params.page);
+              this.load(search, 1);
             }}
           />
         </div>

@@ -17,6 +17,7 @@ interface CourseSearchProps {
 }
 
 interface CourseSearchState {
+  defaultCourses: CourseAd[];
   visibleCourses: CourseAd[];
 
   courseAmount: number;
@@ -38,6 +39,7 @@ class CourseSearch extends React.Component<
     super(props);
 
     this.state = {
+      defaultCourses: [],
       visibleCourses: [],
 
       courseAmount: 0,
@@ -71,7 +73,7 @@ class CourseSearch extends React.Component<
 
         <div className="flex flex-col gap-8">
           {/* Shows skeleton if default course selection is yet loading */}
-          {this.state.visibleCourses.length === 0 &&
+          {this.state.loading &&
             Array(5)
               .fill(undefined)
               .map((_item, index) => {
@@ -89,6 +91,27 @@ class CourseSearch extends React.Component<
               {course.description}
             </CourseCard>
           ))}
+
+          {this.state.visibleCourses.length < 5 && (
+            <>
+              <h4 className="mb-0">
+                {`No ${
+                  this.state.visibleCourses.length === 0 ? "" : "more"
+                } courses found. Here are some recommended ones.`}
+              </h4>
+
+              {this.state.defaultCourses.map((course) => (
+                <CourseCard
+                  key={course.id}
+                  id={course.id}
+                  image={course.image}
+                  title={course.title}
+                >
+                  {course.description}
+                </CourseCard>
+              ))}
+            </>
+          )}
 
           {/* If selection exceeds 5 courses, show page navigation */}
           {this.state.courseAmount > 5 && (
@@ -169,13 +192,15 @@ class CourseSearch extends React.Component<
       )
     );
 
-    let [courses, amount] = await Promise.all([
+    let [courses, defaults, amount] = await Promise.all([
       Promise.all(this.requests),
+      this.courses.getAdRange(this.state.pageStartAt, this.state.pageEndAt),
       this.courses.getAdAmountBySearch(search),
     ]);
 
     if (this.requests.length === 1) {
       this.setState({
+        defaultCourses: defaults.slice(0, 5 - courses[0].length),
         visibleCourses: courses[0],
         courseAmount: amount,
         pageAmount: Math.ceil(amount / 6),

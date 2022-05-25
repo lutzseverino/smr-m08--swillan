@@ -92,6 +92,97 @@ export const DummyCourses: CourseAd[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "/dummy.png",
   },
+  {
+    id: 15,
+    title: "Java Begginer Course",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vulputate ex in tristique blandit. Quisque posuere suscipit mi at pharetra. Duis pharetra ultrices odio in fermentum. Fusce eleifend condimentum enim, rhoncus tincidunt orci posuere sed. Cras ac congue nunc. Nam sed laoreet magna, a feugiat leo. Morbi egestas ultricies est, non imperdiet eros luctus in. Etiam scelerisque ullamcorper fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin lobortis id odio ut posuere.",
+    image: "/dummy.png",
+  },
+  {
+    id: 16,
+    title: "Spring Begginer Course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 17,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 18,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 19,
+    title: "HTML Begginer course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 20,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 21,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 22,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 23,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 24,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 25,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 26,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 27,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 28,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
+  {
+    id: 29,
+    title: "Dummy course",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/dummy.png",
+  },
 ];
 
 export const CourseAmount: number = DummyCourses.length;

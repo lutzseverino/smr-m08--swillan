@@ -92,7 +92,7 @@ class CourseSearch extends React.Component<
             </CourseCard>
           ))}
 
-          {this.state.visibleCourses.length < 5 && (
+          {!this.state.loading && this.state.visibleCourses.length < 5 && (
             <>
               <h4 className="mb-0">
                 {`No ${
@@ -117,6 +117,7 @@ class CourseSearch extends React.Component<
           {this.state.courseAmount > 5 && (
             <PageNav
               onClick={(page) => {
+                window.scrollTo(0, 0);
                 this.load(this.props.params.search, page);
               }}
               current={+this.props.params.page}
@@ -203,7 +204,7 @@ class CourseSearch extends React.Component<
         defaultCourses: defaults.slice(0, 5 - courses[0].length),
         visibleCourses: courses[0],
         courseAmount: amount,
-        pageAmount: Math.ceil(amount / 6),
+        pageAmount: Math.ceil(amount / 5),
         loading: false,
       });
     }

@@ -1,29 +1,10 @@
 import React from "react";
 import Button from "components/Button";
-import Card, { CardSkeleton } from "components/Card";
-import CourseRepository, { CourseInfo } from "utils/CourseRepository";
+import RecommendedCoursesGrid from "components/RecommendedCourseGrid";
 
-interface HomeState {
-  courses: CourseRepository;
-  recommended: CourseInfo[];
-  loading: boolean;
-}
-
-export default class Home extends React.Component<{}, HomeState> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      courses: new CourseRepository(),
-      recommended: [],
-      loading: true,
-    };
-  }
-
+export default class Home extends React.Component {
   componentDidMount() {
     document.title = "swillan - home";
-
-    this.load(6);
   }
 
   render(): React.ReactNode {
@@ -43,31 +24,8 @@ export default class Home extends React.Component<{}, HomeState> {
         <div className="flex flex-col">
           <h4>Recommended courses</h4>
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {this.state.loading &&
-              Array(6)
-                .fill(undefined)
-                .map((_item, index) => {
-                  return <CardSkeleton key={index} />;
-                })}
+          <RecommendedCoursesGrid amount={6} />
 
-            {!this.state.loading &&
-              this.state.recommended.slice(0, 6).map((course) => (
-                <Card
-                  key={course.id}
-                  id={course.id}
-                  image={course.image}
-                  title={course.title}
-                  author={course.author}
-                  button={{
-                    text: "Start learning",
-                    href: `/course?q=${course.id}&title=${course.title}`,
-                  }}
-                >
-                  {course.description}
-                </Card>
-              ))}
-          </div>
           <div className="mt-8 self-center">
             <Button href="/discover">Explore everything</Button>
           </div>
@@ -75,13 +33,4 @@ export default class Home extends React.Component<{}, HomeState> {
       </div>
     );
   }
-
-  private load = async (amount: number) => {
-    let courses = await this.state.courses.getCourseRange(0, amount);
-
-    this.setState({
-      recommended: courses,
-      loading: false,
-    });
-  };
 }

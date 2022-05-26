@@ -20,6 +20,9 @@ interface CourseSearchState {
   defaultCourses: CourseAd[];
   visibleCourses: CourseAd[];
 
+  currentPage: number;
+  currentSearch: string;
+
   courseAmount: number;
   pageAmount: number;
   pageStartAt: number;
@@ -34,6 +37,7 @@ class CourseSearch extends React.Component<
 > {
   private courses = new CourseRepository();
   private requests = new Array<Promise<CourseAd[]>>();
+  private params = new URLSearchParams(window.location.search);
 
   constructor(props: any) {
     super(props);
@@ -41,6 +45,9 @@ class CourseSearch extends React.Component<
     this.state = {
       defaultCourses: [],
       visibleCourses: [],
+
+      currentPage: 0,
+      currentSearch: "",
 
       courseAmount: 0,
       pageAmount: 0,
@@ -54,7 +61,10 @@ class CourseSearch extends React.Component<
   componentDidMount() {
     document.title = "swillan - courses";
 
-    this.load(this.props.params.search, +this.props.params.page || 1);
+    let search = this.params.get("q") || undefined;
+    let page = this.params.get("page") || 1;
+
+    this.load(search, +page);
   }
 
   render() {
@@ -62,7 +72,7 @@ class CourseSearch extends React.Component<
       <div className="m-8 h-full">
         <div className="my-8 flex flex-row items-center gap-4">
           <SearchBar
-            defaultValue={this.props.params.search}
+            defaultValue={this.state.currentSearch}
             loading={this.state.loading}
             placeholder="Search courses"
             search={(search) => {
@@ -118,9 +128,9 @@ class CourseSearch extends React.Component<
             <PageNav
               onClick={(page) => {
                 window.scrollTo(0, 0);
-                this.load(this.props.params.search, page);
+                this.load(this.state.currentSearch, page);
               }}
-              current={+this.props.params.page}
+              current={this.state.currentPage}
               pages={this.state.pageAmount}
             />
           )}
@@ -135,18 +145,20 @@ class CourseSearch extends React.Component<
    * @param search the search string
    * @param page the page number
    */
-  private load = (search: string, page: number) => {
-    this.props.params.search = search;
-    this.props.params.page = `${page}`;
+  private load = (search: string = "", page: number) => {
+    search ? this.params.set("q", search) : this.params.delete("q");
+    this.params.set("page", page.toString());
 
     window.history.pushState(
       {},
       "",
-      `/courses/${search ? `search/${search}/` : ""}page/${page}`
+      `${window.location.pathname}?${this.params.toString()}`
     );
 
     this.setState(
       {
+        currentPage: page,
+        currentSearch: search,
         visibleCourses: [],
         loading: true,
       },

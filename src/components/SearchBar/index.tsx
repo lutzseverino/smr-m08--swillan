@@ -13,7 +13,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
 
     return (
       <div className="flex flex-row items-center gap-4">
-        <span className="material-symbols-outlined">search</span>
+        <span className="material-symbols-outlined">&#xe8b6;</span>
 
         <input
           className="w-full rounded-2xl border-2 border-black bg-tropical-violet px-4 py-2 placeholder:text-gray-500 md:w-auto"

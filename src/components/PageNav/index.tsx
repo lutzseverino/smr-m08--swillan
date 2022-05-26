@@ -18,7 +18,7 @@ export default class PageNav extends React.Component<PageNavProps> {
             <>
               <Button onClick={() => this.props.onClick(1)}>1</Button>
 
-              <span className="material-symbols-outlined">more_horiz</span>
+              <span className="material-symbols-outlined">&#xe5d3;</span>
             </>
           ))}
 
@@ -36,7 +36,7 @@ export default class PageNav extends React.Component<PageNavProps> {
 
         {!RANGE.includes(this.props.pages) && (
           <>
-            <span className="material-symbols-outlined">more_horiz</span>
+            <span className="material-symbols-outlined">&#xe5d3;</span>
 
             <Button onClick={() => this.props.onClick(this.props.pages)}>
               {this.props.pages}

@@ -3,7 +3,7 @@ import React from "react";
 /* Components */
 import SearchBar from "components/SearchBar";
 import PageNav from "components/PageNav";
-import CourseCard, { CourseCardSkeleton } from "components/CourseCard";
+import Card, { CardSkeleton } from "components/CourseCard";
 
 /* Utilities */
 import CourseRepository, { CourseAd } from "utils/CourseRepository";
@@ -87,19 +87,19 @@ class CourseSearch extends React.Component<
             Array(5)
               .fill(undefined)
               .map((_item, index) => {
-                return <CourseCardSkeleton key={index} />;
+                return <CardSkeleton key={index} />;
               })}
 
           {/* Shows visisble courses, this may be search and found courses or default ones */}
           {this.state.visibleCourses.map((course) => (
-            <CourseCard
+            <Card
               key={course.id}
               id={course.id}
               image={course.image}
               title={course.title}
             >
               {course.description}
-            </CourseCard>
+            </Card>
           ))}
 
           {!this.state.loading && this.state.visibleCourses.length < 5 && (
@@ -111,14 +111,14 @@ class CourseSearch extends React.Component<
               </h4>
 
               {this.state.defaultCourses.map((course) => (
-                <CourseCard
+                <Card
                   key={course.id}
                   id={course.id}
                   image={course.image}
                   title={course.title}
                 >
                   {course.description}
-                </CourseCard>
+                </Card>
               ))}
             </>
           )}

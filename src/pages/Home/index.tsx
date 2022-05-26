@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "components/Button";
-import CourseCard, { CourseCardSkeleton } from "components/CourseCard";
+import Card, { CardSkeleton } from "components/CourseCard";
 import CourseRepository, { CourseAd } from "utils/CourseRepository";
 
 interface HomeState {
@@ -47,19 +47,19 @@ export default class Home extends React.Component<{}, HomeState> {
               Array(6)
                 .fill(undefined)
                 .map((_item, index) => {
-                  return <CourseCardSkeleton key={index} />;
+                  return <CardSkeleton key={index} />;
                 })}
 
             {!this.state.loading &&
               this.state.recommended.slice(0, 6).map((course) => (
-                <CourseCard
+                <Card
                   key={course.id}
                   id={course.id}
                   image={course.image}
                   title={course.title}
                 >
                   {course.description}
-                </CourseCard>
+                </Card>
               ))}
           </div>
           <div className="mt-8 self-center">

@@ -4,14 +4,14 @@ import Button from "components/Button";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-interface CourseCardProps {
+interface CardProps {
   id: number;
   title: string;
   children: React.ReactNode;
-  image: string;
+  image?: string;
 }
 
-export default class CourseCard extends React.Component<CourseCardProps, {}> {
+export default class Card extends React.Component<CardProps, {}> {
   render(): React.ReactNode {
     return (
       <div
@@ -20,11 +20,13 @@ export default class CourseCard extends React.Component<CourseCardProps, {}> {
         }
       >
         <div className="max-w-full md:max-w-sm">
-          <img
-            className="h-52 w-full object-cover "
-            src={this.props.image}
-            alt={this.props.title}
-          />
+          {this.props.image && (
+            <img
+              className="h-52 w-full object-cover "
+              src={this.props.image}
+              alt={this.props.title}
+            />
+          )}
         </div>
         <div className="flex flex-col md:w-3/5">
           <h4 className="mx-8 mt-8">
@@ -42,7 +44,7 @@ export default class CourseCard extends React.Component<CourseCardProps, {}> {
   }
 }
 
-export class CourseCardSkeleton extends React.Component {
+export class CardSkeleton extends React.Component {
   render(): React.ReactNode {
     return (
       <div

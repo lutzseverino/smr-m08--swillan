@@ -13,15 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* /courses/ path with optional search and page */}
-          <Route path="/courses/" element={<CourseSearch />}>
-            <Route
-              path="search/:search/page/:page"
-              element={<CourseSearch />}
-            />
-            <Route path="search/:search" element={<CourseSearch />} />
-            <Route path="page/:page" element={<CourseSearch />} />
-            <Route path="" element={<CourseSearch />} />
-          </Route>
+          <Route path="/search" element={<CourseSearch />}></Route>
         </Routes>
       </Router>
       <Footer />

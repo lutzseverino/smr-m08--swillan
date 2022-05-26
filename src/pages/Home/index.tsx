@@ -63,7 +63,7 @@ export default class Home extends React.Component<{}, HomeState> {
               ))}
           </div>
           <div className="mt-8 self-center">
-            <Button onClick={() => (window.location.href = "courses/")}>
+            <Button onClick={() => (window.location.href = "/search")}>
               Explore everything
             </Button>
           </div>

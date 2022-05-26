@@ -2,8 +2,9 @@ import React from "react";
 
 interface ButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  href?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export default class Button extends React.Component<ButtonProps> {
@@ -13,13 +14,15 @@ export default class Button extends React.Component<ButtonProps> {
 
   render(): React.ReactNode {
     return (
-      <button
-        disabled={this.props.disabled}
-        onClick={this.props.onClick}
-        className="rounded-2xl border-2 border-black bg-rhythm px-4 py-2 text-white transition-colors hover:bg-tropical-violet disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:bg-rhythm"
-      >
-        {this.props.children}
-      </button>
+      <a href={this.props.href}>
+        <button
+          disabled={this.props.disabled}
+          onClick={this.props.onClick}
+          className="actionable rounded-xl px-4 py-2"
+        >
+          {this.props.children}
+        </button>
+      </a>
     );
   }
 }

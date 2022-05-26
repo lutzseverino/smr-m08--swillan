@@ -3,12 +3,10 @@ import React from "react";
 export default class Footer extends React.Component {
   render() {
     return (
-      <footer className="mt-8 border-t-2 border-black bg-morning-blue p-12 px-16 md:h-64">
+      <footer className="foreground border-style mt-8 border-t p-12 px-16 md:h-64">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div>
-            <h2>
-              <span className="underline">Learn</span>, without gates
-            </h2>
+            <h2>Knowledge shouldn't be hard</h2>
             <h6>
               swillan © 2022 by Jasper Lutz Severino is licensed under{" "}
               <a
@@ -20,7 +18,7 @@ export default class Footer extends React.Component {
               </a>
             </h6>
           </div>
-          <div className="flex flex-row gap-8 text-right">
+          <div className="flex flex-row justify-between gap-8 text-right md:justify-start">
             <div className="flex flex-col">
               <h4>Trust</h4>
               <a

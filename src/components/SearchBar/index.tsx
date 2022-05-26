@@ -16,7 +16,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
         <span className="material-symbols-outlined">&#xe8b6;</span>
 
         <input
-          className="w-full rounded-2xl border-2 border-black bg-tropical-violet px-4 py-2 placeholder:text-gray-500 md:w-auto"
+          className="foreground border-style w-full rounded-xl border px-4 py-2 placeholder:text-gray-500 md:w-auto"
           type="search"
           defaultValue={this.props.defaultValue}
           placeholder={this.props.placeholder}
@@ -34,9 +34,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
         />
 
         <svg
-          className={
-            this.props.loading ? "h-6 w-6 animate-spin text-black" : "hidden"
-          }
+          className={this.props.loading ? "h-6 w-6 animate-spin " : "hidden"}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

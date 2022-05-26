@@ -9,13 +9,6 @@ import Card, { CardSkeleton } from "components/Card";
 import CourseRepository, { CourseInfo } from "utils/CourseRepository";
 import { withParams } from "utils/hocs";
 
-interface CourseSearchProps {
-  params: {
-    page: string;
-    search: string;
-  };
-}
-
 interface CourseSearchState {
   defaultCourses: CourseInfo[];
   visibleCourses: CourseInfo[];
@@ -31,10 +24,7 @@ interface CourseSearchState {
   loading: boolean;
 }
 
-class CourseSearch extends React.Component<
-  CourseSearchProps,
-  CourseSearchState
-> {
+class CourseSearch extends React.Component<{}, CourseSearchState> {
   private courses = new CourseRepository();
   private requests = new Array<Promise<CourseInfo[]>>();
   private params = new URLSearchParams(window.location.search);

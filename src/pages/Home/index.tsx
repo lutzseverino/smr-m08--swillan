@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "components/Button";
-import Card, { CardSkeleton } from "components/CourseCard";
+import Card, { CardSkeleton } from "components/Card";
 import CourseRepository, { CourseAd } from "utils/CourseRepository";
 
 interface HomeState {

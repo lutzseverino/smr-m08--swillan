@@ -3,7 +3,7 @@ import React from "react";
 /* Components */
 import SearchBar from "components/SearchBar";
 import PageNav from "components/PageNav";
-import Card, { CardSkeleton } from "components/CourseCard";
+import Card, { CardSkeleton } from "components/Card";
 
 /* Utilities */
 import CourseRepository, { CourseAd } from "utils/CourseRepository";

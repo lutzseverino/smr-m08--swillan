@@ -6,7 +6,7 @@ import PageNav from "components/PageNav";
 import Card, { CardSkeleton } from "components/Card";
 
 /* Utilities */
-import CourseRepository, { CourseAd } from "utils/CourseRepository";
+import CourseRepository, { CourseInfo } from "utils/CourseRepository";
 import { withParams } from "utils/hocs";
 
 interface CourseSearchProps {
@@ -17,8 +17,8 @@ interface CourseSearchProps {
 }
 
 interface CourseSearchState {
-  defaultCourses: CourseAd[];
-  visibleCourses: CourseAd[];
+  defaultCourses: CourseInfo[];
+  visibleCourses: CourseInfo[];
 
   currentPage: number;
   currentSearch: string;
@@ -36,7 +36,7 @@ class CourseSearch extends React.Component<
   CourseSearchState
 > {
   private courses = new CourseRepository();
-  private requests = new Array<Promise<CourseAd[]>>();
+  private requests = new Array<Promise<CourseInfo[]>>();
   private params = new URLSearchParams(window.location.search);
 
   constructor(props: any) {
@@ -69,7 +69,7 @@ class CourseSearch extends React.Component<
 
   render() {
     return (
-      <div className="m-8 h-full">
+      <div className="m-8 mx-16">
         <div className="my-8 flex flex-row items-center gap-4">
           <SearchBar
             defaultValue={this.state.currentSearch}
@@ -97,6 +97,11 @@ class CourseSearch extends React.Component<
               id={course.id}
               image={course.image}
               title={course.title}
+              author={course.author}
+              button={{
+                text: "Start learning",
+                href: `/course?q=${course.id}&title=${course.title}`,
+              }}
             >
               {course.description}
             </Card>
@@ -116,6 +121,11 @@ class CourseSearch extends React.Component<
                   id={course.id}
                   image={course.image}
                   title={course.title}
+                  author={course.author}
+                  button={{
+                    text: "Start learning",
+                    href: `/course?q=${course.id}&title=${course.title}`,
+                  }}
                 >
                   {course.description}
                 </Card>
@@ -198,7 +208,7 @@ class CourseSearch extends React.Component<
    */
   private findCourses = async (search: string = "") => {
     this.requests.unshift(
-      this.courses.getAdRangeBySearch(
+      this.courses.getCourseRangeBySearch(
         search,
         this.state.pageStartAt,
         this.state.pageEndAt
@@ -207,8 +217,8 @@ class CourseSearch extends React.Component<
 
     let [courses, defaults, amount] = await Promise.all([
       Promise.all(this.requests),
-      this.courses.getAdRange(this.state.pageStartAt, this.state.pageEndAt),
-      this.courses.getAdAmountBySearch(search),
+      this.courses.getCourseRange(this.state.pageStartAt, this.state.pageEndAt),
+      this.courses.getCourseAmountBySearch(search),
     ]);
 
     if (this.requests.length === 1) {

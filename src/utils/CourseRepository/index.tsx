@@ -1,14 +1,20 @@
 import { DummyCourses, CourseAmount } from "data";
 
-export interface CourseAd {
+export interface CourseInfo {
   id: number;
+
   title: string;
   description: string;
-  image: string;
+  image?: string;
+
+  author?: {
+    name?: string;
+    image?: string;
+  };
 }
 
 export default class CourseRepository {
-  public getAds = async (): Promise<CourseAd[]> => {
+  public getCourses = async (): Promise<CourseInfo[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(DummyCourses);
@@ -16,7 +22,7 @@ export default class CourseRepository {
     });
   };
 
-  public getAdAmount = async (): Promise<number> => {
+  public getCourseAmount = async (): Promise<number> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(CourseAmount);
@@ -24,10 +30,10 @@ export default class CourseRepository {
     });
   };
 
-  public getAdRange = async (
+  public getCourseRange = async (
     start: number,
     end: number
-  ): Promise<CourseAd[]> => {
+  ): Promise<CourseInfo[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(DummyCourses.slice(start, end));
@@ -35,8 +41,8 @@ export default class CourseRepository {
     });
   };
 
-  public getAdsBySearch = async (search: string): Promise<CourseAd[]> => {
-    if (!search) return this.getAds();
+  public getCoursesBySearch = async (search: string): Promise<CourseInfo[]> => {
+    if (!search) return this.getCourses();
 
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -52,8 +58,8 @@ export default class CourseRepository {
     });
   };
 
-  public getAdAmountBySearch = async (search: string): Promise<number> => {
-    if (!search) return this.getAdAmount();
+  public getCourseAmountBySearch = async (search: string): Promise<number> => {
+    if (!search) return this.getCourseAmount();
 
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -69,12 +75,12 @@ export default class CourseRepository {
     });
   };
 
-  public getAdRangeBySearch = async (
+  public getCourseRangeBySearch = async (
     search: string,
     start: number,
     end: number
-  ): Promise<CourseAd[]> => {
-    if (!search) return this.getAdRange(start, end);
+  ): Promise<CourseInfo[]> => {
+    if (!search) return this.getCourseRange(start, end);
 
     return new Promise((resolve) => {
       setTimeout(() => {

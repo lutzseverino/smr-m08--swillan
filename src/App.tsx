@@ -1,3 +1,4 @@
+import Course from "pages/Course";
 import Search from "pages/Search";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* /courses/ path with optional search and page */}
-          <Route path="/search" element={<Search />}></Route>
+          <Route path="/search" element={<Search />} />
+          <Route path="/course" element={<Course />} />
         </Routes>
       </Router>
       <Footer />

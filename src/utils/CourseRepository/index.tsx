@@ -22,6 +22,18 @@ export default class CourseRepository {
     });
   };
 
+  public getCourse = async (id: number): Promise<CourseInfo | undefined> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          DummyCourses.find((course) => {
+            return course.id === id;
+          })
+        );
+      }, 1000);
+    });
+  };
+
   public getCourseAmount = async (): Promise<number> => {
     return new Promise((resolve) => {
       setTimeout(() => {

@@ -26,7 +26,7 @@ export default class Navbar extends React.Component<{}, { hide: Boolean }> {
         <div>
           <a href="/">
             <svg
-              className="w-12 "
+              className="w-12"
               viewBox="0 0 285 289"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

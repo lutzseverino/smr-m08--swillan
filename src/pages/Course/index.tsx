@@ -31,7 +31,7 @@ export default class Course extends React.Component<{}, CourseState> {
 
   render() {
     return (
-      <div className="m-8 mx-16 flex flex-col  gap-8">
+      <div className="m-8 flex flex-col gap-8 md:mx-16">
         {this.state.course ? (
           <>
             <div className="flex flex-row justify-between">

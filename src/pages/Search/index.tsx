@@ -59,7 +59,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
 
   render() {
     return (
-      <div className="m-8 mx-16">
+      <div className="m-8 md:mx-16">
         <div className="my-8 flex flex-row items-center gap-4">
           <SearchBar
             defaultValue={this.state.currentSearch}

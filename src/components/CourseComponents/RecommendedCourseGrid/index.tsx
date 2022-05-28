@@ -2,14 +2,14 @@ import React from "react";
 
 import CourseCard from "components/CourseComponents/CourseCard";
 
-import CourseRepository, { CourseData } from "utils/CourseRepository";
+import CourseRepository, { CourseInfo } from "utils/CourseRepository";
 
 interface RecommendedCoursesGridProps {
   amount: number;
 }
 
 interface RecommendedCoursesGridState {
-  courses: CourseData[];
+  courses: CourseInfo[];
 }
 
 export default class RecommendedCoursesGrid extends React.Component<
@@ -45,7 +45,7 @@ export default class RecommendedCoursesGrid extends React.Component<
   }
 
   private load = async (amount: number) => {
-    let courses = await this.courses.getCourseRecommendations(amount);
+    let courses = await this.courses.getInfoRecommendations(amount);
 
     this.setState({
       courses: courses,

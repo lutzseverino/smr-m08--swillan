@@ -1,6 +1,6 @@
-import { dummyCourses, courseAmount } from "data";
+import { dummyCourses } from "data";
 
-export type CourseData = {
+export type Course = {
   id: {
     $oid: string;
   };
@@ -8,121 +8,155 @@ export type CourseData = {
   info: {
     title: string;
     description: string;
-    image?: string | null;
+    image?: string;
+
     author?: {
       name: string;
-      image?: string | null;
+      image?: string;
     };
+  };
+
+  content: { chapters: Chapter[] };
+};
+
+export type CourseInfo = {
+  id: {
+    $oid: string;
+  };
+
+  title: string;
+  description: string;
+  image?: string;
+
+  author?: {
+    name: string;
+    image?: string;
   };
 };
 
+export type CourseContent = {
+  id: {
+    $oid: string;
+  };
+
+  chapters: Chapter[];
+};
+
+type Chapter = {
+  title: string;
+  content: string;
+};
+
+/**
+ * This is a dummy repository that returns dummy data,
+ * it's used for development purposes only.
+ *
+ * This will be replaced by a real repository in production.
+ */
 export default class CourseRepository {
-  public getCourses = async (): Promise<CourseData[]> => {
+  /**
+   * Returns a course by its id.
+   *
+   * @param id the id of the course
+   * @returns the course or undefined
+   */
+  public get = (id: string): Promise<Course | undefined> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(dummyCourses);
+        resolve(dummyCourses.find((course) => course.id.$oid === id));
       }, 1000);
     });
   };
 
-  public getCourseRecommendations = async (
-    amount: number
-  ): Promise<CourseData[]> => {
-    const courses = await this.getCourses();
-    return courses.slice(0, amount);
-  };
-
-  public getCourse = async (id: string): Promise<CourseData | undefined> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(
-          dummyCourses.find((course) => {
-            return course.id.$oid === id;
-          })
-        );
-      }, 1000);
-    });
-  };
-
-  public getCourseAmount = async (): Promise<number> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(courseAmount);
-      }, 1000);
-    });
-  };
-
-  public getCourseRange = async (
+  /**
+   * Returns the information of a range of courses.
+   *
+   * @param start the start index
+   * @param end the end index
+   * @returns an array of courses or an empty array
+   */
+  public getInfoRange = async (
     start: number,
     end: number
-  ): Promise<CourseData[]> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(dummyCourses.slice(start, end));
-      }, 1000);
-    });
-  };
-
-  public getCoursesBySearch = async (search: string): Promise<CourseData[]> => {
-    if (!search) return this.getCourses();
-
+  ): Promise<CourseInfo[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          dummyCourses.filter((course) => {
-            return (
-              course.info.title.toLowerCase().includes(search.toLowerCase()) ||
-              course.info.description
-                .toLowerCase()
-                .includes(search.toLowerCase())
-            );
-          })
+          dummyCourses.slice(start, end).map((course) => ({
+            ...course.info,
+            id: course.id,
+          }))
         );
       }, 1000);
     });
   };
 
-  public getCourseAmountBySearch = async (search: string): Promise<number> => {
-    if (!search) return this.getCourseAmount();
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(
-          dummyCourses.filter((course) => {
-            return (
-              course.info.title.toLowerCase().includes(search.toLowerCase()) ||
-              course.info.description
-                .toLowerCase()
-                .includes(search.toLowerCase())
-            );
-          }).length
-        );
-      }, 1000);
-    });
-  };
-
-  public getCourseRangeBySearch = async (
+  /**
+   * Returns the information of a range of courses
+   * that match the search string.
+   *
+   * @param search the search string
+   * @param start the start index
+   * @param end the end index
+   * @returns an array of courses or an empty array
+   */
+  public getInfoRangeBySearch = (
     search: string,
     start: number,
     end: number
-  ): Promise<CourseData[]> => {
-    if (!search) return this.getCourseRange(start, end);
-
+  ): Promise<CourseInfo[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
           dummyCourses
-            .filter((course) => {
-              return (
-                course.info.title
-                  .toLowerCase()
-                  .includes(search.toLowerCase()) ||
-                course.info.description
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
-              );
-            })
+            .filter((course) => course.info.title.includes(search))
             .slice(start, end)
+            .map((course) => ({
+              ...course.info,
+              id: course.id,
+            }))
+        );
+      }, 1000);
+    });
+  };
+
+  /**
+   * Returns the amount of courses that match a
+   * given string
+   *
+   * @param search the search string
+   * @returns the amount of courses that match the search string
+   */
+  public getAmountBySearch = (search: string): Promise<number> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          dummyCourses.filter((course) => course.info.title.includes(search))
+            .length
+        );
+      }, 1000);
+    });
+  };
+
+  /**
+   * Returns a given amount of information of random courses.
+   *
+   * @param amount the amount of courses to return
+   * @returns an array of courses or an empty array
+   */
+  public getInfoRecommendations = async (
+    amount: number
+  ): Promise<CourseInfo[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          dummyCourses
+            .sort(() => 0.5 - Math.random())
+            .slice(0, amount)
+            .map((course) => ({
+              ...course.info,
+              id: course.id,
+            }))
         );
       }, 1000);
     });

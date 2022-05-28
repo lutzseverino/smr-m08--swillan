@@ -2,30 +2,29 @@ import React from "react";
 
 import Card from "components/Card";
 
-import { CourseData } from "utils/CourseRepository";
+import { CourseInfo } from "utils/CourseRepository";
 
 interface CourseCardProps {
-  course?: CourseData;
+  course?: CourseInfo;
 }
 
 export default class CourseCard extends React.Component<CourseCardProps> {
   render() {
     return (
       <Card
-        id={this.props.course?.id.$oid || "0"}
-        title={this.props.course?.info.title}
-        image={this.props.course?.info.image}
-        author={this.props.course?.info.author}
+        title={this.props.course?.title}
+        image={this.props.course?.image}
+        author={this.props.course?.author}
         button={
           this.props.course
             ? {
                 text: "Start learning",
-                href: `/course?q=${this.props.course.id.$oid}&title=${this.props.course.info.title}`,
+                href: `/course?q=${this.props.course.id.$oid}&title=${this.props.course.title}`,
               }
             : undefined
         }
       >
-        {this.props.course?.info.description}
+        {this.props.course?.description}
       </Card>
     );
   }

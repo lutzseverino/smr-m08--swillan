@@ -2,10 +2,10 @@ import React from "react";
 
 import CourseCard from "components/CourseComponents/CourseCard";
 
-import { CourseData } from "utils/CourseRepository";
+import { CourseInfo } from "utils/CourseRepository";
 
 interface CourseListProps {
-  courses: CourseData[];
+  courses: CourseInfo[];
   amount: number;
 }
 

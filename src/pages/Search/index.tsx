@@ -5,12 +5,12 @@ import CourseList from "components/CourseComponents/CourseList";
 import SearchBar from "components/SearchBar";
 import PageNav from "components/PageNav";
 
-import CourseRepository, { CourseData } from "utils/CourseRepository";
+import CourseRepository, { CourseInfo } from "utils/CourseRepository";
 import { withParams } from "utils/hocs";
 
 interface CourseSearchState {
-  defaultCourses: CourseData[];
-  foundCourses: CourseData[];
+  defaultCourses: CourseInfo[];
+  foundCourses: CourseInfo[];
 
   currentPage: number;
   currentSearch: string;
@@ -25,7 +25,7 @@ interface CourseSearchState {
 
 class CourseSearch extends React.Component<{}, CourseSearchState> {
   private courses = new CourseRepository();
-  private requests = new Array<Promise<CourseData[]>>();
+  private requests = new Array<Promise<CourseInfo[]>>();
   private params = new URLSearchParams(window.location.search);
 
   constructor(props: any) {
@@ -162,7 +162,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
    */
   private findCourses = async (search: string = "") => {
     this.requests.unshift(
-      this.courses.getCourseRangeBySearch(
+      this.courses.getInfoRangeBySearch(
         search,
         this.state.pageStartAt,
         this.state.pageEndAt
@@ -171,8 +171,8 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
 
     let [courses, defaults, amount] = await Promise.all([
       Promise.all(this.requests),
-      this.courses.getCourseRange(this.state.pageStartAt, this.state.pageEndAt),
-      this.courses.getCourseAmountBySearch(search),
+      this.courses.getInfoRange(this.state.pageStartAt, this.state.pageEndAt),
+      this.courses.getAmountBySearch(search),
     ]);
 
     if (this.requests.length === 1) {

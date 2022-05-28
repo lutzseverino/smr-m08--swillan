@@ -1,13 +1,15 @@
-import Button from "components/Button";
-import RecommendedCoursesGrid from "components/RecommendedCourseGrid";
 import React from "react";
-import CourseRepository, { CourseInfo } from "utils/CourseRepository";
+
+import Button from "components/Button";
+import RecommendedCoursesGrid from "components/CourseComponents/RecommendedCourseGrid";
+
+import CourseRepository, { CourseData } from "utils/CourseRepository";
 
 interface CourseState {
-  id: number;
+  id: string;
   title: string;
 
-  course?: CourseInfo;
+  course?: CourseData;
 }
 
 export default class Course extends React.Component<{}, CourseState> {
@@ -18,7 +20,7 @@ export default class Course extends React.Component<{}, CourseState> {
     super(props);
 
     this.state = {
-      id: parseInt(this.params.get("q") || "0"),
+      id: this.params.get("q") || "0",
       title: this.params.get("title") || "",
     };
   }
@@ -31,13 +33,15 @@ export default class Course extends React.Component<{}, CourseState> {
 
   render() {
     return (
-      <div className="m-8 flex flex-col gap-8 md:mx-16">
+      <div className="flex flex-col gap-8">
         {this.state.course ? (
           <>
             <div className="flex flex-row justify-between">
               <div>
-                <h2>{this.state.course?.title}</h2>
-                <p className="max-w-prose">{this.state.course.description}</p>
+                <h2>{this.state.course?.info.title}</h2>
+                <p className="max-w-prose">
+                  {this.state.course.info.description}
+                </p>
 
                 <div>
                   <Button>Start this course</Button>
@@ -72,7 +76,7 @@ export default class Course extends React.Component<{}, CourseState> {
     );
   }
 
-  private load = async (id: number) => {
+  private load = async (id: string) => {
     this.setState({
       id,
       course: await this.courses.getCourse(id),

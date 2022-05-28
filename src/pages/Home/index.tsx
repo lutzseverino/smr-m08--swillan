@@ -1,6 +1,7 @@
 import React from "react";
+
+import RecommendedCoursesGrid from "components/CourseComponents/RecommendedCourseGrid";
 import Button from "components/Button";
-import RecommendedCoursesGrid from "components/RecommendedCourseGrid";
 
 export default class Home extends React.Component {
   componentDidMount() {
@@ -9,7 +10,7 @@ export default class Home extends React.Component {
 
   render(): React.ReactNode {
     return (
-      <div className="m-8 md:mx-16">
+      <div>
         <div className="my-16 md:my-48 md:text-center">
           <h1>
             Knowledge{" "}

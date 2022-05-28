@@ -1,18 +1,18 @@
 import React from "react";
-import Button from "components/Button";
-
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-interface CardProps {
-  id: number;
+import Button from "components/Button";
 
-  title: string;
-  image?: string;
+interface CardProps {
+  id: string;
+
+  title?: string;
+  image?: string | null;
 
   author?: {
-    name?: string;
-    image?: string;
+    name: string;
+    image?: string | null;
   };
 
   button?: {
@@ -20,7 +20,7 @@ interface CardProps {
     href: string;
   };
 
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default class Card extends React.Component<CardProps, {}> {
@@ -31,19 +31,21 @@ export default class Card extends React.Component<CardProps, {}> {
           "foreground border-style relative flex w-full flex-col overflow-hidden rounded-xl border transition-transform md:h-48 md:flex-row"
         }
       >
-        <div className="md:w-64">
-          {this.props.image && (
+        {this.props.image && (
+          <div className="md:w-64">
             <img
               className="h-52 w-full object-cover "
               src={this.props.image}
               alt="course advertisement"
             />
-          )}
-        </div>
+          </div>
+        )}
         <div className="flex max-h-64 w-full flex-col">
-          <h4 className="mx-8 mt-8">{this.props.title}</h4>
+          <h4 className="mx-8 mt-8">{this.props.title || <Skeleton />}</h4>
           <div className="text-fade mx-8 overflow-hidden pb-0">
-            <p className="text-transparent">{this.props.children}</p>
+            <p className="text-transparent">
+              {this.props.children || <Skeleton count={3} />}
+            </p>
           </div>
         </div>
 
@@ -69,7 +71,7 @@ export default class Card extends React.Component<CardProps, {}> {
 
 interface AuthorCardProps {
   name?: string;
-  image?: string;
+  image?: string | null;
 }
 
 class AuthorCard extends React.Component<AuthorCardProps> {
@@ -84,29 +86,6 @@ class AuthorCard extends React.Component<AuthorCardProps> {
           />
         )}
         <span className="py-2 px-4 text-sm">{this.props.name}</span>
-      </div>
-    );
-  }
-}
-
-export class CardSkeleton extends React.Component {
-  render(): React.ReactNode {
-    return (
-      <div
-        className={
-          "foreground border-style flex w-full flex-col overflow-hidden rounded-xl border md:h-48 md:flex-row"
-        }
-      >
-        <div className="flex w-full flex-col">
-          <h4 className="mx-8 mt-8">
-            <Skeleton />
-          </h4>
-          <div className="h-full px-8 pb-8 md:pb-0">
-            <p className="text-black">
-              <Skeleton count={3} />
-            </p>
-          </div>
-        </div>
       </div>
     );
   }

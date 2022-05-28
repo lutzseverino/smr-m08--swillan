@@ -5,15 +5,15 @@ import CourseCard from "components/CourseComponents/CourseCard";
 import { CourseData } from "utils/CourseRepository";
 
 interface CourseListProps {
-  courses?: CourseData[];
+  courses: CourseData[];
   amount: number;
 }
 
 export default class CourseList extends React.Component<CourseListProps> {
   render() {
     return (
-      <div>
-        {this.props.courses
+      <div className="flex flex-col gap-8">
+        {this.props.courses.length > 0
           ? this.props.courses.map((course, index) => (
               <CourseCard key={index} course={course} />
             ))

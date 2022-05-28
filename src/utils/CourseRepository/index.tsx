@@ -1,33 +1,43 @@
-import { DummyCourses, CourseAmount } from "data";
+import { dummyCourses, courseAmount } from "data";
 
-export interface CourseInfo {
-  id: number;
-
-  title: string;
-  description: string;
-  image?: string;
-
-  author?: {
-    name?: string;
-    image?: string;
+export type CourseData = {
+  id: {
+    $oid: string;
   };
-}
+
+  info: {
+    title: string;
+    description: string;
+    image?: string | null;
+    author?: {
+      name: string;
+      image?: string | null;
+    };
+  };
+};
 
 export default class CourseRepository {
-  public getCourses = async (): Promise<CourseInfo[]> => {
+  public getCourses = async (): Promise<CourseData[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(DummyCourses);
+        resolve(dummyCourses);
       }, 1000);
     });
   };
 
-  public getCourse = async (id: number): Promise<CourseInfo | undefined> => {
+  public getCourseRecommendations = async (
+    amount: number
+  ): Promise<CourseData[]> => {
+    const courses = await this.getCourses();
+    return courses.slice(0, amount);
+  };
+
+  public getCourse = async (id: string): Promise<CourseData | undefined> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          DummyCourses.find((course) => {
-            return course.id === id;
+          dummyCourses.find((course) => {
+            return course.id.$oid === id;
           })
         );
       }, 1000);
@@ -37,7 +47,7 @@ export default class CourseRepository {
   public getCourseAmount = async (): Promise<number> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(CourseAmount);
+        resolve(courseAmount);
       }, 1000);
     });
   };
@@ -45,24 +55,26 @@ export default class CourseRepository {
   public getCourseRange = async (
     start: number,
     end: number
-  ): Promise<CourseInfo[]> => {
+  ): Promise<CourseData[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(DummyCourses.slice(start, end));
+        resolve(dummyCourses.slice(start, end));
       }, 1000);
     });
   };
 
-  public getCoursesBySearch = async (search: string): Promise<CourseInfo[]> => {
+  public getCoursesBySearch = async (search: string): Promise<CourseData[]> => {
     if (!search) return this.getCourses();
 
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          DummyCourses.filter((course) => {
+          dummyCourses.filter((course) => {
             return (
-              course.title.toLowerCase().includes(search.toLowerCase()) ||
-              course.description.toLowerCase().includes(search.toLowerCase())
+              course.info.title.toLowerCase().includes(search.toLowerCase()) ||
+              course.info.description
+                .toLowerCase()
+                .includes(search.toLowerCase())
             );
           })
         );
@@ -76,10 +88,12 @@ export default class CourseRepository {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          DummyCourses.filter((course) => {
+          dummyCourses.filter((course) => {
             return (
-              course.title.toLowerCase().includes(search.toLowerCase()) ||
-              course.description.toLowerCase().includes(search.toLowerCase())
+              course.info.title.toLowerCase().includes(search.toLowerCase()) ||
+              course.info.description
+                .toLowerCase()
+                .includes(search.toLowerCase())
             );
           }).length
         );
@@ -91,18 +105,24 @@ export default class CourseRepository {
     search: string,
     start: number,
     end: number
-  ): Promise<CourseInfo[]> => {
+  ): Promise<CourseData[]> => {
     if (!search) return this.getCourseRange(start, end);
 
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          DummyCourses.filter((course) => {
-            return (
-              course.title.toLowerCase().includes(search.toLowerCase()) ||
-              course.description.toLowerCase().includes(search.toLowerCase())
-            );
-          }).slice(start, end)
+          dummyCourses
+            .filter((course) => {
+              return (
+                course.info.title
+                  .toLowerCase()
+                  .includes(search.toLowerCase()) ||
+                course.info.description
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              );
+            })
+            .slice(start, end)
         );
       }, 1000);
     });

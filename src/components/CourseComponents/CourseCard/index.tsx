@@ -16,10 +16,14 @@ export default class CourseCard extends React.Component<CourseCardProps> {
         title={this.props.course?.info.title}
         image={this.props.course?.info.image}
         author={this.props.course?.info.author}
-        button={{
-          text: "Start learning",
-          href: `/course?q=${this.props.course?.id.$oid}&title=${this.props.course?.info.title}`,
-        }}
+        button={
+          this.props.course
+            ? {
+                text: "Start learning",
+                href: `/course?q=${this.props.course.id.$oid}&title=${this.props.course.info.title}`,
+              }
+            : undefined
+        }
       >
         {this.props.course?.info.description}
       </Card>

@@ -3,16 +3,18 @@ import React from "react";
 import Button from "components/Button";
 import RecommendedCoursesGrid from "components/CourseComponents/RecommendedCourseGrid";
 
-import CourseRepository, { CourseData } from "utils/CourseRepository";
+import CourseRepository, { Course } from "utils/CourseRepository";
 
 interface CourseState {
   id: string;
   title: string;
 
-  course?: CourseData;
+  course?: Course;
+
+  loading: boolean;
 }
 
-export default class Course extends React.Component<{}, CourseState> {
+export default class CourseView extends React.Component<{}, CourseState> {
   private courses = new CourseRepository();
   private params = new URLSearchParams(window.location.search);
 
@@ -22,6 +24,10 @@ export default class Course extends React.Component<{}, CourseState> {
     this.state = {
       id: this.params.get("q") || "0",
       title: this.params.get("title") || "",
+
+      course: undefined,
+
+      loading: true,
     };
   }
 
@@ -34,11 +40,11 @@ export default class Course extends React.Component<{}, CourseState> {
   render() {
     return (
       <div className="flex flex-col gap-8">
-        {this.state.course ? (
+        {this.state.course && (
           <>
             <div className="flex flex-row justify-between">
               <div>
-                <h2>{this.state.course?.info.title}</h2>
+                <h2>{this.state.course.info.title}</h2>
                 <p className="max-w-prose">
                   {this.state.course.info.description}
                 </p>
@@ -49,11 +55,11 @@ export default class Course extends React.Component<{}, CourseState> {
               </div>
 
               <div className="text-right">
-                {/* Temporary dummy chapters */}
-                <h3>Course contents</h3>
+                <h3>Course chapters</h3>
                 <ul>
-                  <li>Chapter 1: Main method</li>
-                  <li>Chapter 2: Variable declaration</li>
+                  {this.state.course.content.chapters.map((chapter, index) => (
+                    <li key={index}>{chapter.title}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -62,7 +68,9 @@ export default class Course extends React.Component<{}, CourseState> {
 
             <h3>Preview</h3>
           </>
-        ) : (
+        )}
+
+        {!this.state.loading && !this.state.course && (
           <div>
             <div className="text-center">
               <h2>404 - Not Found</h2>
@@ -77,9 +85,11 @@ export default class Course extends React.Component<{}, CourseState> {
   }
 
   private load = async (id: string) => {
+    const course = await this.courses.get(id);
+
     this.setState({
-      id,
-      course: await this.courses.getCourse(id),
+      course,
+      loading: false,
     });
   };
 }

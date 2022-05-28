@@ -5,8 +5,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Button from "components/Button";
 
 interface CardProps {
-  id: string;
-
   title?: string;
   image?: string | null;
 
@@ -85,7 +83,9 @@ class AuthorCard extends React.Component<AuthorCardProps> {
             alt="author of the course"
           />
         )}
-        <span className="py-2 px-4 text-sm">{this.props.name}</span>
+        <span className="hidden py-2 px-4 text-sm md:inline">
+          {this.props.name}
+        </span>
       </div>
     );
   }

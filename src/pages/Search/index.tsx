@@ -1,17 +1,16 @@
 import React from "react";
 
-/* Components */
+import CourseCard from "components/CourseComponents/CourseCard";
+import CourseList from "components/CourseComponents/CourseList";
 import SearchBar from "components/SearchBar";
 import PageNav from "components/PageNav";
-import Card, { CardSkeleton } from "components/Card";
 
-/* Utilities */
-import CourseRepository, { CourseInfo } from "utils/CourseRepository";
+import CourseRepository, { CourseData } from "utils/CourseRepository";
 import { withParams } from "utils/hocs";
 
 interface CourseSearchState {
-  defaultCourses: CourseInfo[];
-  visibleCourses: CourseInfo[];
+  defaultCourses: CourseData[];
+  foundCourses: CourseData[];
 
   currentPage: number;
   currentSearch: string;
@@ -26,7 +25,7 @@ interface CourseSearchState {
 
 class CourseSearch extends React.Component<{}, CourseSearchState> {
   private courses = new CourseRepository();
-  private requests = new Array<Promise<CourseInfo[]>>();
+  private requests = new Array<Promise<CourseData[]>>();
   private params = new URLSearchParams(window.location.search);
 
   constructor(props: any) {
@@ -34,7 +33,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
 
     this.state = {
       defaultCourses: [],
-      visibleCourses: [],
+      foundCourses: [],
 
       currentPage: 0,
       currentSearch: "",
@@ -59,7 +58,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
 
   render() {
     return (
-      <div className="m-8 md:mx-16">
+      <div>
         <div className="my-8 flex flex-row items-center gap-4">
           <SearchBar
             defaultValue={this.state.currentSearch}
@@ -72,53 +71,18 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
         </div>
 
         <div className="flex flex-col gap-8">
-          {/* Shows skeleton if default course selection is yet loading */}
-          {this.state.loading &&
-            Array(5)
-              .fill(undefined)
-              .map((_item, index) => {
-                return <CardSkeleton key={index} />;
-              })}
+          <CourseList courses={this.state.foundCourses} amount={5} />
 
-          {/* Shows visisble courses, this may be search and found courses or default ones */}
-          {this.state.visibleCourses.map((course) => (
-            <Card
-              key={course.id}
-              id={course.id}
-              image={course.image}
-              title={course.title}
-              author={course.author}
-              button={{
-                text: "Start learning",
-                href: `/course?q=${course.id}&title=${course.title}`,
-              }}
-            >
-              {course.description}
-            </Card>
-          ))}
-
-          {!this.state.loading && this.state.visibleCourses.length < 5 && (
+          {!this.state.loading && this.state.foundCourses.length < 5 && (
             <>
               <h4 className="mb-0">
                 {`No ${
-                  this.state.visibleCourses.length === 0 ? "" : "more"
+                  this.state.foundCourses.length === 0 ? "" : "more"
                 } courses found. Here are some recommended ones.`}
               </h4>
 
-              {this.state.defaultCourses.map((course) => (
-                <Card
-                  key={course.id}
-                  id={course.id}
-                  image={course.image}
-                  title={course.title}
-                  author={course.author}
-                  button={{
-                    text: "Start learning",
-                    href: `/course?q=${course.id}&title=${course.title}`,
-                  }}
-                >
-                  {course.description}
-                </Card>
+              {this.state.defaultCourses.map((course, index) => (
+                <CourseCard key={index} course={course} />
               ))}
             </>
           )}
@@ -159,7 +123,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
       {
         currentPage: page,
         currentSearch: search,
-        visibleCourses: [],
+        foundCourses: [],
         loading: true,
       },
       () => {
@@ -214,7 +178,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
     if (this.requests.length === 1) {
       this.setState({
         defaultCourses: defaults.slice(0, 5 - courses[0].length),
-        visibleCourses: courses[0],
+        foundCourses: courses[0],
         courseAmount: amount,
         pageAmount: Math.ceil(amount / 5),
         loading: false,

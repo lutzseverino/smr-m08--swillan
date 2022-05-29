@@ -2,23 +2,23 @@
   {
     "id": { "$oid": "6292a12afc13ae21ad00001e" },
     "info": {
-      "title": "ipsum dolor sit amet",
-      "description": "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
+      "title": "Java Introductory Course",
+      "description": "Understand the basic logic behind the popular object-oriented language with this free introductory course.",
       "image": "http://dummyimage.com/452x375.png/dddddd/000000",
       "author": {
-        "name": "Alfonse Balfe",
+        "name": "Jasper L.S.",
         "image": "http://dummyimage.com/50x50.png/5fa2dd/ffffff"
       }
     },
     "content": {
       "chapters": [
         {
-          "title": "nulla suspendisse potenti",
-          "content": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est."
+          "title": "Introduction",
+          "content": "## Introduction\nThis course will teach you the basics of computer programming and object-oriented programming by introducing you to Java.\n\nThat means you should be able to take the courses with no previous knowledge.\n\nThere are no exams, and you are completely free to take the courses at your own pace, going back and forth between the chapters with absolutely zero restrictions.\n\n### Follow-ups\nThis course currently doesn't offer any follow-ups, no other courses regarding this subject are available."
         },
         {
-          "title": "eu sapien cursus vestibulum",
-          "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+          "title": "IDEs",
+          "content": "## IDEs \nModern programming is practically always done in an IDE (integrated development environment). An IDE contains a set of useful tools for the programmer. It does not create the program by itself, but it can give hints about common mistakes in the code, and help the programmer understand the structure of the program.\n\n### IntelliJ IDEA Community\nIn this course, we'll use IntelliJ IDEA Community, but - if you have a preference - you're free to use whatever IDE you like."
         },
         {
           "title": "in faucibus orci luctus",

@@ -4,6 +4,7 @@ import Button from "components/Button";
 import RecommendedCoursesGrid from "components/CourseComponents/RecommendedCourseGrid";
 
 import CourseRepository, { Course } from "utils/CourseRepository";
+import ReactMarkdown from "react-markdown";
 
 interface CourseState {
   id: string;
@@ -42,7 +43,7 @@ export default class CourseView extends React.Component<{}, CourseState> {
       <div className="flex flex-col gap-8">
         {this.state.course && (
           <>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col justify-between md:flex-row">
               <div>
                 <h2>{this.state.course.info.title}</h2>
                 <p className="max-w-prose">
@@ -50,15 +51,19 @@ export default class CourseView extends React.Component<{}, CourseState> {
                 </p>
 
                 <div>
-                  <Button>Start this course</Button>
+                  <Button href={`/course?q=${this.state.course.id}`}>
+                    Start this course
+                  </Button>
                 </div>
               </div>
 
-              <div className="text-right">
+              <div className="mt-8 md:mt-0 md:text-right">
                 <h3>Course chapters</h3>
                 <ul>
                   {this.state.course.content.chapters.map((chapter, index) => (
-                    <li key={index}>{chapter.title}</li>
+                    <li key={index}>
+                      {index + 1}. {chapter.title}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -66,7 +71,17 @@ export default class CourseView extends React.Component<{}, CourseState> {
 
             <hr />
 
-            <h3>Preview</h3>
+            <div className="flex flex-col md:items-center">
+              <h3>Preview</h3>
+
+              <div className="foreground border-style relative max-w-max rounded-xl border p-8">
+                <article className="mx-auto max-w-prose">
+                  <ReactMarkdown>
+                    {this.state.course.content.chapters[0].content}
+                  </ReactMarkdown>
+                </article>
+              </div>
+            </div>
           </>
         )}
 

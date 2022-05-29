@@ -19,7 +19,7 @@ export default class CourseCard extends React.Component<CourseCardProps> {
           this.props.course
             ? {
                 text: "Start learning",
-                href: `/course?q=${this.props.course.id.$oid}&title=${this.props.course.title}`,
+                href: `/preview?q=${this.props.course.id.$oid}&title=${this.props.course.title}`,
               }
             : undefined
         }

@@ -8,7 +8,6 @@ import ReactMarkdown from "react-markdown";
 
 interface CourseState {
   id: string;
-  title: string;
 
   course?: Course;
 
@@ -24,7 +23,6 @@ export default class CourseView extends React.Component<{}, CourseState> {
 
     this.state = {
       id: this.params.get("q") || "0",
-      title: this.params.get("title") || "",
 
       course: undefined,
 
@@ -33,8 +31,6 @@ export default class CourseView extends React.Component<{}, CourseState> {
   }
 
   componentDidMount() {
-    document.title = `swillan - ${this.state.title}`;
-
     this.load(this.state.id);
   }
 
@@ -51,7 +47,7 @@ export default class CourseView extends React.Component<{}, CourseState> {
                 </p>
 
                 <div>
-                  <Button href={`/course?q=${this.state.course.id}`}>
+                  <Button href={`/course?q=${this.state.id}`}>
                     Start this course
                   </Button>
                 </div>
@@ -74,7 +70,7 @@ export default class CourseView extends React.Component<{}, CourseState> {
             <div className="flex flex-col md:items-center">
               <h3>Preview</h3>
 
-              <div className="foreground border-style relative max-w-max rounded-xl border p-8">
+              <div className="foreground border-style w-full rounded-xl border p-8">
                 <article className="mx-auto max-w-prose">
                   <ReactMarkdown>
                     {this.state.course.content.chapters[0].content}
@@ -106,5 +102,7 @@ export default class CourseView extends React.Component<{}, CourseState> {
       course,
       loading: false,
     });
+
+    document.title = `swillan - ${course ? course.info.title : "not found"}`;
   };
 }

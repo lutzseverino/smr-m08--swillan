@@ -14,7 +14,7 @@ interface CourseState {
   loading: boolean;
 }
 
-export default class CourseView extends React.Component<{}, CourseState> {
+export default class CoursePreview extends React.Component<{}, CourseState> {
   private courses = new CourseRepository();
   private params = new URLSearchParams(window.location.search);
 
@@ -47,7 +47,7 @@ export default class CourseView extends React.Component<{}, CourseState> {
                 </p>
 
                 <div>
-                  <Button href={`/course?q=${this.state.id}`}>
+                  <Button href={`/course?q=${this.state.id}&chapter=0`}>
                     Start this course
                   </Button>
                 </div>

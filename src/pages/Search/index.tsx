@@ -58,7 +58,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
 
   render() {
     return (
-      <div>
+      <>
         <div className="my-8 flex flex-row items-center gap-4">
           <SearchBar
             defaultValue={this.state.currentSearch}
@@ -99,7 +99,7 @@ class CourseSearch extends React.Component<{}, CourseSearchState> {
             />
           )}
         </div>
-      </div>
+      </>
     );
   }
 

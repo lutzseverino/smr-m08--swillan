@@ -10,7 +10,7 @@ export default class Home extends React.Component {
 
   render(): React.ReactNode {
     return (
-      <div>
+      <>
         <div className="my-16 md:my-48 md:text-center">
           <h1>
             Knowledge{" "}
@@ -31,7 +31,7 @@ export default class Home extends React.Component {
             <Button href="/discover">Explore everything</Button>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

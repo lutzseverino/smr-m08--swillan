@@ -68,3 +68,7 @@ p {
 h6 {
   @apply mb-4 text-sm opacity-80;
 }
+
+pre {
+  @apply border-style mb-4 rounded-xl border bg-[#282b2e] p-4;
+}

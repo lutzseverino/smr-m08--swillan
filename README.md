@@ -1,6 +1,4 @@
-# swillan web
-
-A login-free courses platform.
+![github-frame](https://user-images.githubusercontent.com/28309837/236690710-0574bdb6-024a-4389-a4af-e991403439b6.png)
 
 ## Available Scripts
 
